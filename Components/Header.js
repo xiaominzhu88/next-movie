@@ -3,14 +3,15 @@ import Link from 'next/link';
 
 export default function Header() {
   const navLinks = [
-    { name: 'Recipes', url: '/recipes' },
-    { name: 'Search by ingredient', url: '/search' },
+    { name: 'Home', url: '/' },
+    { name: 'Search', url: '/search' },
+    { name: 'Favourite', url: '/favourite' },
     { name: 'Tips&Ideas', url: '/tips' },
   ];
   return (
     <div className="header">
       <div className="nav">
-        <h1>-----What to eat today?-----</h1>
+        <h1>What is my movie?</h1>
       </div>
       <div className="links">
         {navLinks.map((link, i) => {
@@ -23,12 +24,17 @@ export default function Header() {
         <p>SIGN UP | LOG IN</p>
       </div>
       <style jsx>{`
+        h1 {
+          letter-spacing: 0.2em;
+          font-family: serif;
+          text-shadow: 2px 6px 12px rgba(0, 0, 0, 0.3);
+          color: #578fbc;
+        }
         .nav {
           margin: 0 auto;
           font-weight: 800;
           background-image: url('/mainImage.jpg');
           background-attachment: fixed;
-          background-size: cover;
           box-shadow: 3px 11px 18px #b3d1e9;
           text-align: center;
           padding: 25px;
@@ -39,6 +45,7 @@ export default function Header() {
           align-items: center;
           font-size: 1em;
           margin: 0 auto;
+          background: #17465c;
         }
         p {
           font-size: 1em;

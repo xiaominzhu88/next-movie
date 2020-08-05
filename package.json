@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "devWithPostgres": "run-p build postgres",
+    "build": "next build && echo Done!",
     "start": "next start -p ${PORT:-\"3000\"}"
   },
   "dependencies": {
