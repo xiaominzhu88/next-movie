@@ -9,8 +9,6 @@ export const useFetch = (url) => {
     fetch(url, {
       method: 'GET',
       headers: {
-        'access-control-request-headers': 'x-rapidapi-key',
-        'access-control-request-method': 'GET',
         'Content-Type': 'application/json',
       },
     })
@@ -24,6 +22,5 @@ export const useFetch = (url) => {
       })
       .catch((err) => err);
   }, [url]);
-  console.log('DDDDDD:', data);
   return data;
 };
