@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   dropdown: {
     opacity: 0.9,
     backgroundColor: '#ffff',
-    width: '30vw',
+    width: '23vw',
     height: '10em',
     color: '#3F51B5',
     position: 'absolute',
@@ -46,7 +46,7 @@ export default function Home() {
     setOpen(false);
   };
 
-  const data = useFetch(
+  const { data, loading } = useFetch(
     // `https://api.themoviedb.org/3/movie/${input}?api_key=${apiKey}&language=en-US`,
     `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${input}&include_adult=false&region=us&year=${year}`,
   );
@@ -84,7 +84,7 @@ export default function Home() {
                   value={input}
                   onChange={(e) => handleInput(e)}
                 />
-                <p>Year: </p>
+                <p>Select Year: </p>
                 <input
                   type="text"
                   min="0"
@@ -92,41 +92,45 @@ export default function Home() {
                   value={year}
                   onChange={(e) => setYear(e.target.value)}
                 />
-                <ul>
-                  {data
-                    ? data.map((item, i) => {
-                        return (
-                          <li key={item.id}>
-                            <h2
-                              onClick={handleClick}
-                              className={classes.root}
-                              style={{ cursor: 'pointer' }}
-                            >
-                              {item.original_title}
-                            </h2>
-                            {open ? (
-                              <div className={classes.dropdown}>
-                                {item.overview || 'Ops there is no description'}
-                              </div>
-                            ) : null}
+                {loading ? (
+                  <p>Loadding...</p>
+                ) : (
+                  <ul>
+                    {data
+                      ? data.map((item, i) => {
+                          return (
+                            <li key={item.id}>
+                              <h2
+                                onClick={handleClick}
+                                className={classes.root}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                {item.original_title}
+                              </h2>
+                              {open ? (
+                                <div className={classes.dropdown} id="drowdown">
+                                  {item.overview || 'Ops, no description'}
+                                </div>
+                              ) : null}
 
-                            <Link href="/search">
-                              <a>
-                                <img
-                                  src={
-                                    item.poster_path
-                                      ? `https://image.tmdb.org/t/p/w342/${item.poster_path}`
-                                      : '/imgError.jpg'
-                                  }
-                                  alt="images"
-                                />
-                              </a>
-                            </Link>
-                          </li>
-                        );
-                      })
-                    : 'No Search Result'}
-                </ul>
+                              <Link href="/">
+                                <a>
+                                  <img
+                                    src={
+                                      item.poster_path
+                                        ? `https://image.tmdb.org/t/p/w342/${item.poster_path}`
+                                        : '/imgError.jpg'
+                                    }
+                                    alt="images"
+                                  />
+                                </a>
+                              </Link>
+                            </li>
+                          );
+                        })
+                      : 'No Search Result'}
+                  </ul>
+                )}
                 )
               </div>
             </div>
@@ -160,8 +164,10 @@ export default function Home() {
             box-shadow: 5px 11px 18px #fff;
           }
           .quote {
-            width: 50vw;
+            width: 40vw;
             margin: 1em auto;
+            text-shadow: 1px 3px 3px #f5f5f5;
+            color: #1063a5;
           }
           .hr {
             display: flex;
@@ -176,14 +182,22 @@ export default function Home() {
             align-items: flex-start;
             list-style: none;
             margin: 1em auto;
-            padding: 1em;
+            padding: 2em;
           }
+
           h2 {
             color: #f3f8fa;
             font-weight: 700;
-            border: 1px solid #fff;
             background-color: #618dbe;
             padding: 5px;
+            transition: all 0.5s ease;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            font-family: monospace;
+            overflow-x: scroll;
+            height: 2em;
+            width: 20vw;
+            font-size: 1em;
           }
           h2:hover {
             background-color: #f3f8fa;
@@ -199,6 +213,18 @@ export default function Home() {
             width: 342px;
             height: 513px;
             box-shadow: 5px 11px 18px gray;
+          }
+          @media (max-width: 600px) {
+            img {
+              width: 160px;
+              height: 240px;
+            }
+            h2 {
+              font-weight: 500;
+              height: 2.2em;
+              width: 160px;
+              font-size: 0.9em;
+            }
           }
         `}</style>
       </div>

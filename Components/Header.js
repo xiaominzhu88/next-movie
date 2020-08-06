@@ -1,10 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Header() {
+  const router = useRouter();
+
   const navLinks = [
     { name: 'Home', url: '/' },
-    { name: 'Search', url: '/search' },
+    { name: 'TV', url: '/tv' },
     { name: 'Favourite', url: '/favourite' },
     { name: 'Tips&Ideas', url: '/tips' },
   ];
@@ -17,7 +20,9 @@ export default function Header() {
         {navLinks.map((link, i) => {
           return (
             <Link href={link.url} key={i}>
-              <a>{link.name}</a>
+              <a className={router.pathname === link.url ? 'active' : ''}>
+                {link.name}
+              </a>
             </Link>
           );
         })}
@@ -47,9 +52,10 @@ export default function Header() {
           margin: 0 auto;
           background: #17465c;
         }
+
         p {
           font-size: 1em;
-          color: hotpink;
+          color: #ce76dd;
         }
         a {
           color: #578fbc;
@@ -57,6 +63,11 @@ export default function Header() {
           font-weight: 700;
           line-height: 1em;
           font-family: monospace;
+        }
+        a:hover,
+        .active {
+          color: #fff;
+          text-decoration: underline;
         }
         @media (max-width: 700px) {
           h1 {

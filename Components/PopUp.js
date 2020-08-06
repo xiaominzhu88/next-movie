@@ -15,13 +15,10 @@ export default function PopUp(props) {
         >
           &times;{' '}
         </span>
-        <p>{props.text}</p>
+        <p>{props.warning}</p>
       </div>
 
       <style jsx>{`
-        .popup_inner {
-        }
-
         .popup {
           position: fixed;
           width: 100%;
@@ -31,7 +28,7 @@ export default function PopUp(props) {
           right: 0;
           bottom: 0;
           margin: auto;
-          background-color: rgba(0, 0, 0, 0.2);
+          background-color: rgb(33 150 243 / 32%);
         }
 
         p {
@@ -46,8 +43,9 @@ export default function PopUp(props) {
           text-align: center;
           font-family: 'Fira Mono', monospace;
           color: rgb(221, 23, 90);
-          background-color: #f6f0f0;
-          width: 50%;
+          background-color: #a1c8e7;
+          width: 40vw;
+          height: 20vh;
           margin: auto;
           padding: 1em;
           border-radius: 10px;
