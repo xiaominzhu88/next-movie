@@ -3,6 +3,7 @@ import useSWR from 'swr';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import PopUp from '../Components/PopUp';
+import Head from 'next/head';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -31,8 +32,13 @@ export default function Tv() {
 
   return (
     <div className="tv">
-      <Header />
+      <Head>
+        <title>TV search</title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="description popular tv search" content="TV search" />
+      </Head>
       <div className="wrapper">
+        <Header />
         <h3>
           More Popular TVs? <br />
           more than 400 pages!{' '}

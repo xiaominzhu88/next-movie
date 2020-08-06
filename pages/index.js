@@ -57,6 +57,10 @@ export default function Home() {
         <Head>
           <title>Movie Next</title>
           <link rel="icon" href="/favicon.ico" />
+          <meta
+            name="description search movie with names and years"
+            content="movie search with names and years"
+          />
         </Head>
 
         <main className="App">
