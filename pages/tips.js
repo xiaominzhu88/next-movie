@@ -8,6 +8,12 @@ import Rating from '@material-ui/lab/Rating';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Box from '@material-ui/core/Box';
 import { toast, ToastContainer } from 'react-toastify';
+import { makeStyles } from '@material-ui/core/styles';
+import Switch from '@material-ui/core/Switch';
+import Paper from '@material-ui/core/Paper';
+import Fade from '@material-ui/core/Fade';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Button from '@material-ui/core/Button';
 
 const StyledRating = withStyles({
   iconFilled: {
@@ -18,11 +24,38 @@ const StyledRating = withStyles({
   },
 })(Rating);
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: 48,
+    background: 'linear-gradient(45deg, #F44336 15%, #03A9F4 95%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgb(204 192 206)',
+    color: 'white',
+    padding: '0 30px',
+    margin: '0.5em',
+  },
+  container: {
+    display: 'flex',
+  },
+  paper: {
+    margin: theme.spacing(1),
+  },
+}));
+
 export default function Tips() {
   const [toggle, setToggle] = useState(false);
   const [page, setPage] = useState(1);
+  const [showText, setShowText] = useState(false);
+  const classes = useStyles();
+
+  const [checked, setChecked] = useState(false);
   const apiKey = process.env.MovieKey;
 
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+    setToggle(true);
+  };
   const data = useFetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`,
   );
@@ -45,9 +78,6 @@ export default function Tips() {
 
   console.log('TIP: ', data);
 
-  const toggleShow = () => {
-    setToggle(!toggle);
-  };
   const notify = () => {
     toast('💞Thank you for your rating💞', {
       autoClose: 3000,
@@ -68,35 +98,102 @@ export default function Tips() {
       </Head>
       <div className="TipsContainer">
         <Header />
-        <div className="popButton">
-          <button onClick={toggleShow}>Popular Movies</button>
-          <button onClick={() => setPage(page + 1)}>more?</button>
 
-          <div
-            style={{
-              display: toggle ? 'block' : 'none',
-              margin: '1em',
-            }}
-            className="rate"
-          >
-            <Box style={{ width: '10vw', margin: '0 auto' }}>
-              <StyledRating
-                name="customized-color"
-                defaultValue={2}
-                getLabelText={(value) =>
-                  `${value} Heart${value !== 1 ? 's' : ''}`
-                }
-                precision={0.5}
-                icon={<FavoriteIcon fontSize="inherit" />}
-              />
-            </Box>
-            <button onClick={notify}>rate us here</button>
-            <ToastContainer />
-          </div>
+        <div
+          style={{
+            display: toggle ? 'block' : 'none',
+            margin: '1em',
+          }}
+          className="rate"
+        >
+          <Box style={{ width: '10vw', margin: '0 auto' }}>
+            <StyledRating
+              name="customized-color"
+              defaultValue={2}
+              getLabelText={(value) =>
+                `${value} Heart${value !== 1 ? 's' : ''}`
+              }
+              precision={0.5}
+              icon={<FavoriteIcon fontSize="inherit" />}
+              onClick={notify}
+            />
+          </Box>
+          <ToastContainer />
         </div>
-
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+        }}
+      >
+        <FormControlLabel
+          control={<Switch checked={checked} onChange={handleChange} />}
+          label="Show"
+        />
+        <Button className={classes.root} onClick={() => setPage(page + 1)}>
+          More ?
+        </Button>
+        {/* <button onClick={() => setPage(page + 1)}>more?</button>{' '} */}
+      </div>
+      <div className={`${classes.container} ${classes.root}`}>
         <ul style={{ display: toggle ? 'flex' : 'none' }}>
-          {data
+          <Fade in={checked}>
+            <Paper
+              className={classes.paper}
+              style={{
+                display: toggle ? 'flex' : 'none',
+                flexWrap: 'wrap',
+              }}
+            >
+              {data
+                ? data.map((popData, i) => {
+                    return (
+                      <li key={popData.id}>
+                        <h2 onClick={() => setShowText(!showText)}>
+                          {popData.title}
+                        </h2>
+                        <p>
+                          <span role="img" aria-label="emoji movie">
+                            🎞 Released:
+                          </span>
+                          {popData.release_date}
+                        </p>
+                        <p>
+                          <span role="img" aria-label="emoji movie">
+                            🏵 Popularity:
+                          </span>
+                          {popData.popularity}
+                        </p>
+                        <div className="parent">
+                          <img
+                            alt="pop movies"
+                            src={
+                              popData.poster_path
+                                ? `https://image.tmdb.org/t/p/w342/${popData.poster_path}`
+                                : '/imgError.jpg'
+                            }
+                          />
+                          <div
+                            className="text"
+                            style={{
+                              display: showText ? 'block' : 'none',
+                              overflow: ' scroll',
+                              height: '4.5em',
+                              margin: '0.5em auto',
+                            }}
+                          >
+                            {popData.overview}
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  })
+                : null}
+            </Paper>
+          </Fade>
+          {/* {data
             ? data.map((popData, i) => {
                 return (
                   <li key={popData.id}>
@@ -118,10 +215,9 @@ export default function Tips() {
                   </li>
                 );
               })
-            : null}
+            : null} */}
         </ul>
       </div>
-
       {/* <Footer /> */}
       <style jsx>{`
         .popButton {
@@ -137,10 +233,13 @@ export default function Tips() {
           margin: 1em auto;
           padding: 2em;
         }
+        li {
+          margin: 1em;
+        }
         h2 {
           color: #f3f8fa;
           font-weight: 700;
-          background-color: #618dbe;
+          background: linear-gradient(45deg, #586465 10%, #03a9f4 80%);
           padding: 5px;
           transition: all 0.5s ease;
           border: 1px solid #fff;
@@ -150,13 +249,34 @@ export default function Tips() {
           height: 2.5em;
           width: 20vw;
           font-size: 1em;
+          cursor: pointer;
+          text-align: center;
         }
         h2:hover {
-          background-color: #f3f8fa;
+          background: #cad1d3;
           color: #618dbe;
         }
         p {
           color: #09426f;
+          font-family: monospace;
+        }
+
+        .parent {
+          position: relative;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+        .parent img {
+          vertical-align: middle;
+        }
+        .parent .text {
+          position: absolute;
+          bottom: 0;
+          background: rgb(0, 0, 0);
+          background: rgba(0, 0, 0, 0.5);
+          color: #ffffff;
+          width: 100%;
+          padding: 20px;
         }
       `}</style>
     </div>
