@@ -10,10 +10,11 @@ export default function Header() {
     { name: 'TV', url: '/tv' },
     { name: 'Favourite', url: '/favourite' },
     { name: 'Tips&Ideas', url: '/tips' },
+    { name: 'Search Actor', url: '/actor' },
   ];
   return (
     <div className="header">
-      <div className="nav">
+      <div className="nav typing">
         <h1>What is my movie?</h1>
       </div>
       <div className="links">
@@ -32,8 +33,20 @@ export default function Header() {
         h1 {
           letter-spacing: 0.2em;
           font-family: serif;
-          text-shadow: 2px 6px 12px rgba(0, 0, 0, 0.3);
+          text-shadow: 6px 5px 13px rgb(143 193 233);
           color: #578fbc;
+        }
+        .typing h1 {
+          overflow: hidden;
+          animation: typing 3s steps(50, end);
+        }
+        @keyframes typing {
+          from {
+            width: 50%;
+          }
+          to {
+            width: 100%;
+          }
         }
         .nav {
           margin: 0 auto;

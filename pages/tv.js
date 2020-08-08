@@ -4,22 +4,63 @@ import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import PopUp from '../Components/PopUp';
 import Head from 'next/head';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
+const useStyles = makeStyles({
+  root: {
+    background: 'linear-gradient(45deg, #fe6bfd 15%, #3F51B5 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgb(204 192 206)',
+    color: 'white',
+    height: 48,
+    padding: '0 30px',
+    margin: '0.5em',
+  },
+});
 export default function Tv() {
   const apiKey = process.env.MovieKey;
   const [tvPage, setTvPage] = useState(1);
   const [showText, setShowText] = useState(false);
   const [warning, setWarning] = useState('');
   const [visible, setVisible] = useState(false);
+  const classes = useStyles();
 
   const { data, error } = useSWR(
     `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&language=cn&page=${tvPage}`,
     fetcher,
   );
-  if (error) return 'An error has occurred.';
-  if (!data) return 'Loading...';
+  if (error)
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          fontSize: '2em',
+          margin: '5em auto',
+          color: 'hotpink',
+          fontFamily: 'monospace',
+        }}
+      >
+        <p>'An error has occurred.'</p>
+      </div>
+    );
+  if (!data)
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          fontSize: '2em',
+          margin: '5em auto',
+          color: 'hotpink',
+          fontFamily: 'monospace',
+        }}
+      >
+        <p>'Loading...'</p>
+      </div>
+    );
 
   console.log('TVDATA:', data);
 
@@ -39,36 +80,42 @@ export default function Tv() {
       </Head>
       <div className="wrapper">
         <Header />
-        <h3>
-          More Popular TVs? <br />
-          more than 400 pages!{' '}
-        </h3>
-        <button
-          onClick={() => {
-            if (tvPage < 450) {
-              setTvPage(tvPage + 1);
-            } else {
-              setWarning('No more Pages! ⛳️');
-              togglePop();
-            }
-          }}
-        >
-          Next
-        </button>
-        <button
-          onClick={() => {
-            if (tvPage > 1) {
-              setTvPage(tvPage - 1);
-            } else {
-              setWarning('Page starts from 1! 🈲');
-              togglePop();
-            }
-          }}
-        >
-          Back
-        </button>
+        <div className="info">
+          <h3>
+            More Popular TVs? <br />
+            more than 400 pages!{' '}
+          </h3>
+          <Button
+            className={classes.root}
+            onClick={() => {
+              if (tvPage < 450) {
+                setTvPage((pre) => pre + 1);
+              } else {
+                setWarning('No more Pages! ⛳️');
+                togglePop();
+              }
+            }}
+          >
+            Next
+          </Button>
+          <Button
+            className={classes.root}
+            onClick={() => {
+              if (tvPage > 1) {
+                setTvPage((pre) => pre - 1);
+              } else {
+                setWarning('Page starts from 1! 🈲');
+                togglePop();
+              }
+            }}
+          >
+            Back
+          </Button>
 
-        <p>Page: {tvPage}</p>
+          <p className="spanNum">
+            Page: <span>{tvPage}</span>
+          </p>
+        </div>
       </div>
       <div className="tv-container">
         <ul>
@@ -118,6 +165,9 @@ export default function Tv() {
       </div>
       <Footer />
       <style jsx>{`
+        span {
+          color: #ce76dd;
+        }
         ul {
           display: flex;
           flex-wrap: wrap;
@@ -162,7 +212,7 @@ export default function Tv() {
           height: 6em;
           position: absolute;
           overflow: scroll;
-          margin: -1em auto;
+          margin: 0 auto;
           borderradius: 5px;
           letterspacing: 0.1em;
           padding: 5px;
@@ -180,13 +230,20 @@ export default function Tv() {
           font-size: 1em;
           font-weight: 700;
         }
-        h3 {
+        .info {
           font-size: 1.5em;
           width: 40vw;
           margin: 0.5em auto;
-          padding: 1em;
+          padding: 0.5em;
           background: #2196f357;
           color: #ce76dd;
+        }
+
+        .spanNum {
+          text-align: center;
+          font-family: monospace;
+          color: #fff;
+          border-top: 1px solid #00bcd4;
         }
         p {
           text-align: center;

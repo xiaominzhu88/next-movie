@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Head from 'next/head';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
@@ -27,11 +27,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Home() {
+  const inputRef = useRef();
   const [input, setInput] = useState('a');
   const [year, setYear] = useState(2020);
   const classes = useStyles();
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const apiKey = process.env.MovieKey;
 
   const handleInput = (e) => {
@@ -46,10 +47,25 @@ export default function Home() {
     setOpen(false);
   };
 
-  const { data, loading } = useFetch(
+  const data = useFetch(
     // `https://api.themoviedb.org/3/movie/${input}?api_key=${apiKey}&language=en-US`,
     `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${input}&include_adult=false&region=us&year=${year}`,
   );
+  if (!data) {
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          fontSize: '2em',
+          margin: '5em auto',
+          color: 'hotpink',
+          fontFamily: 'monospace',
+        }}
+      >
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
@@ -84,6 +100,7 @@ export default function Home() {
               <div className="images">
                 <p>Search your Movie:</p>
                 <input
+                  ref={inputRef}
                   type="text"
                   value={input}
                   onChange={(e) => handleInput(e)}
@@ -96,45 +113,48 @@ export default function Home() {
                   value={year}
                   onChange={(e) => setYear(e.target.value)}
                 />
-                {loading ? (
-                  <p>Loadding...</p>
-                ) : (
-                  <ul>
-                    {data
-                      ? data.map((item, i) => {
-                          return (
-                            <li key={item.id}>
-                              <h2
-                                onClick={handleClick}
-                                className={classes.root}
-                                style={{ cursor: 'pointer' }}
-                              >
-                                {item.original_title}
-                              </h2>
-                              {open ? (
-                                <div className={classes.dropdown} id="drowdown">
-                                  {item.overview || 'Ops, no description'}
-                                </div>
-                              ) : null}
+                <button
+                  onClick={() => {
+                    console.log(inputRef.current);
+                  }}
+                >
+                  Focus
+                </button>
+                <ul>
+                  {data
+                    ? data.map((item, i) => {
+                        return (
+                          <li key={item.id}>
+                            <h2
+                              onClick={handleClick}
+                              className={classes.root}
+                              style={{ cursor: 'pointer' }}
+                            >
+                              {item.original_title}
+                            </h2>
+                            {open ? (
+                              <div className={classes.dropdown} id="drowdown">
+                                {item.overview || 'Ops, no description'}
+                              </div>
+                            ) : null}
 
-                              <Link href="/">
-                                <a>
-                                  <img
-                                    src={
-                                      item.poster_path
-                                        ? `https://image.tmdb.org/t/p/w342/${item.poster_path}`
-                                        : '/imgError.jpg'
-                                    }
-                                    alt="images"
-                                  />
-                                </a>
-                              </Link>
-                            </li>
-                          );
-                        })
-                      : 'No Search Result'}
-                  </ul>
-                )}
+                            <Link href="/">
+                              <a>
+                                <img
+                                  src={
+                                    item.poster_path
+                                      ? `https://image.tmdb.org/t/p/w342/${item.poster_path}`
+                                      : '/imgError.jpg'
+                                  }
+                                  alt="images"
+                                />
+                              </a>
+                            </Link>
+                          </li>
+                        );
+                      })
+                    : 'No Search Result'}
+                </ul>
                 )
               </div>
             </div>
