@@ -126,6 +126,7 @@ export default function Tips() {
           display: 'flex',
           justifyContent: 'space-around',
           alignItems: 'center',
+          margin: '2em auto',
         }}
       >
         <FormControlLabel
@@ -135,7 +136,6 @@ export default function Tips() {
         <Button className={classes.root} onClick={() => setPage(page + 1)}>
           More ?
         </Button>
-        {/* <button onClick={() => setPage(page + 1)}>more?</button>{' '} */}
       </div>
       <div className={`${classes.container} ${classes.root}`}>
         <ul style={{ display: toggle ? 'flex' : 'none' }}>
@@ -145,6 +145,7 @@ export default function Tips() {
               style={{
                 display: toggle ? 'flex' : 'none',
                 flexWrap: 'wrap',
+                justifyContent: 'space-around',
               }}
             >
               {data
@@ -193,29 +194,6 @@ export default function Tips() {
                 : null}
             </Paper>
           </Fade>
-          {/* {data
-            ? data.map((popData, i) => {
-                return (
-                  <li key={popData.id}>
-                    <h2>{popData.title}</h2>
-                    <p>
-                      <span role="img" aria-label="emoji movie">
-                        🎞
-                      </span>
-                      {popData.release_date}
-                    </p>
-                    <img
-                      alt="pop movies"
-                      src={
-                        popData.poster_path
-                          ? `https://image.tmdb.org/t/p/w342/${popData.poster_path}`
-                          : '/imgError.jpg'
-                      }
-                    />
-                  </li>
-                );
-              })
-            : null} */}
         </ul>
       </div>
       {/* <Footer /> */}

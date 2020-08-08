@@ -8,21 +8,49 @@ export default function Namelist({ nameData }) {
             const knownfor = el.known_for.map((film) => film.original_title);
             const paths = el.known_for.map((path) => path.poster_path);
             const ids = el.known_for.map((id) => id.id);
+            const department = el.known_for_department;
 
             return (
               <ul key={ids.map((id) => id)}>
-                <h2>{el.name}</h2>
-                <h3>Known for: </h3>
-
-                {knownfor &&
-                  knownfor.map((item, k) => {
-                    return (
-                      <li key={k}>
-                        <p>{item}</p>
-                      </li>
-                    );
-                  })}
-
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    color: '#03A9F4',
+                  }}
+                >
+                  <h2
+                    style={{
+                      marginRight: '0.5em',
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    {el.name}
+                  </h2>
+                  ~~
+                  {department && department}{' '}
+                  <p style={{ marginLeft: '5px' }}>movie</p>
+                </div>
+                <div
+                  style={{
+                    display: 'block',
+                    color: 'hotpink',
+                    fontFamily: 'monospace',
+                  }}
+                >
+                  <span role="img" aria-label="emoji butterfly">
+                    🦋
+                  </span>{' '}
+                  {knownfor &&
+                    knownfor.map((item, k) => {
+                      return (
+                        <li key={k}>
+                          <p>{item}</p>
+                        </li>
+                      );
+                    })}{' '}
+                </div>
                 <div className="imgs" key={ids.map((id) => id + 1)}>
                   {paths &&
                     paths.map((path, j) => {
@@ -43,7 +71,8 @@ export default function Namelist({ nameData }) {
               </ul>
             );
           })
-        : null}
+        : 'Search for Actor?'}
+
       <style jsx>{`
         .imgs {
           display: flex;

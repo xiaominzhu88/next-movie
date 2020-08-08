@@ -5,7 +5,7 @@ import Header from '../Components/Header';
 import { useFetch } from './useFetch';
 
 export default function Home() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState('a');
   const [year, setYear] = useState(2020);
   const [open, setOpen] = useState(false);
   const apiKey = process.env.MovieKey;
@@ -118,7 +118,7 @@ export default function Home() {
                         </li>
                       );
                     })
-                  : 'Search some Movie? '}
+                  : 'Search for some Movie? '}
               </ul>
               )
             </div>
