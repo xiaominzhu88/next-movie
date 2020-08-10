@@ -42,14 +42,15 @@ export default function Namelist({ nameData }) {
                   <span role="img" aria-label="emoji butterfly">
                     🦋
                   </span>{' '}
-                  {knownfor &&
-                    knownfor.map((item, k) => {
-                      return (
-                        <li key={k}>
-                          <p>{item}</p>
-                        </li>
-                      );
-                    })}{' '}
+                  {knownfor
+                    ? knownfor.map((item, k) => {
+                        return (
+                          <li key={k}>
+                            <p>{item}</p>
+                          </li>
+                        );
+                      })
+                    : null}{' '}
                 </div>
                 <div className="imgs" key={ids.map((id) => id + 1)}>
                   {paths &&

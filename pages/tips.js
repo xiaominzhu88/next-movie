@@ -166,11 +166,15 @@ export default function Tips() {
                             const tips =
                               JSON.parse(window.localStorage.getItem('tips')) ||
                               [];
-
-                            window.localStorage.setItem(
-                              'tips',
-                              JSON.stringify([...tips, popData.title]),
-                            );
+                            if (tips.indexOf(popData.title) === -1) {
+                              window.localStorage.setItem(
+                                'tips',
+                                JSON.stringify([...tips, popData.title]),
+                              );
+                              alert('Saved to favourite page');
+                            } else {
+                              alert('Favourite already exist');
+                            }
                           }}
                         >
                           Add to Favourite
@@ -238,7 +242,7 @@ export default function Tips() {
           color: #f3f8fa;
           font-weight: 700;
           background: linear-gradient(45deg, #586465 10%, #03a9f4 80%);
-          padding: 5px;
+          padding: 8px;
           transition: all 0.5s ease;
           border: 1px solid #fff;
           border-radius: 5px;

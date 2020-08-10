@@ -102,67 +102,67 @@ export default function Movie() {
                 {data.length !== 0
                   ? data.map((item, i) => {
                       return (
-                        <>
-                          <li key={item.id}>
-                            <div className="title">
-                              <h2
-                                onClick={() => {
-                                  setOpen((prev) => !prev);
-                                }}
-                                style={{ cursor: 'pointer' }}
-                              >
-                                {item.original_title}
-                              </h2>
-                            </div>
-                            <div className="parent">
-                              <img
-                                src={
-                                  item.poster_path
-                                    ? `https://image.tmdb.org/t/p/w342/${item.poster_path}`
-                                    : '/imgError.jpg'
-                                }
-                                alt="movie images"
-                              />
-                              <div
-                                className="text"
-                                style={{
-                                  display: open ? 'block' : 'none',
-                                  overflow: 'scroll',
-                                  height: '5em',
-                                  margin: '0.2em auto',
-                                }}
-                              >
-                                {item.overview || 'Ops, no description'}
-                              </div>
-                            </div>
-                            <Button
-                              className={classes.root}
+                        <li key={item.id}>
+                          <div className="title">
+                            <h2
                               onClick={() => {
-                                const favoMovies =
-                                  JSON.parse(
-                                    window.localStorage.getItem('favoMovies'),
-                                  ) || [];
-
-                                if (
-                                  favoMovies.indexOf(item.original_title) === -1
-                                ) {
-                                  window.localStorage.setItem(
-                                    'favoMovies',
-                                    JSON.stringify([
-                                      ...favoMovies,
-                                      item.original_title,
-                                    ]),
-                                  );
-                                  alert('Saved to favourite page');
-                                } else {
-                                  alert('Favourite already exist');
-                                }
+                                setOpen((prev) => !prev);
+                              }}
+                              style={{ cursor: 'pointer' }}
+                            >
+                              {item.original_title}
+                            </h2>
+                          </div>
+                          <div className="parent" key={item.id}>
+                            <img
+                              src={
+                                item.poster_path
+                                  ? `https://image.tmdb.org/t/p/w342/${item.poster_path}`
+                                  : '/imgError.jpg'
+                              }
+                              alt="movie images"
+                            />
+                            <div
+                              key={item.id + 'movie'}
+                              className="text"
+                              style={{
+                                display: open ? 'block' : 'none',
+                                overflow: 'scroll',
+                                height: '5em',
+                                margin: '0.2em auto',
                               }}
                             >
-                              add to favourite
-                            </Button>{' '}
-                          </li>
-                        </>
+                              {item.overview || 'Ops, no description'}
+                            </div>
+                          </div>
+                          <Button
+                            key={item.id + item.original_title}
+                            className={classes.root}
+                            onClick={() => {
+                              const favoMovies =
+                                JSON.parse(
+                                  window.localStorage.getItem('favoMovies'),
+                                ) || [];
+
+                              if (
+                                favoMovies.indexOf(item.original_title) === -1
+                              ) {
+                                window.localStorage.setItem(
+                                  'favoMovies',
+                                  JSON.stringify([
+                                    ...favoMovies,
+                                    item.original_title,
+                                  ]),
+                                );
+                                alert('Saved to favourite page');
+                              } else {
+                                alert('Favourite already exist');
+                              }
+                            }}
+                          >
+                            add to favourite
+                          </Button>{' '}
+                        </li>
                       );
                     })
                   : 'Search for some Movie? '}

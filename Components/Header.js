@@ -68,7 +68,7 @@ export default function Header() {
 
         p {
           font-size: 1em;
-          color: #ce76dd;
+          color: #9e9e9e;
         }
         a {
           color: #578fbc;
