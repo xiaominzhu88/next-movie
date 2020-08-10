@@ -123,7 +123,19 @@ export default function Tv() {
             return (
               <li key={tv.id}>
                 <h2 onClick={() => setShowText(!showText)}>{tv.name}</h2>
+                <button
+                  onClick={() => {
+                    const favoTvs =
+                      JSON.parse(window.localStorage.getItem('favoTvs')) || [];
 
+                    window.localStorage.setItem(
+                      'favoTvs',
+                      JSON.stringify([...favoTvs, tv.name]),
+                    );
+                  }}
+                >
+                  add to favourite
+                </button>{' '}
                 <div
                   className="overview"
                   style={{ display: showText ? 'block' : 'none' }}

@@ -155,6 +155,26 @@ export default function Tips() {
                         <h2 onClick={() => setShowText(!showText)}>
                           {popData.title}
                         </h2>
+                        <Button
+                          className={classes.root}
+                          style={{
+                            width: '8em',
+                            fontSize: '0.8em',
+                            fontFamily: 'monospace',
+                          }}
+                          onClick={() => {
+                            const tips =
+                              JSON.parse(window.localStorage.getItem('tips')) ||
+                              [];
+
+                            window.localStorage.setItem(
+                              'tips',
+                              JSON.stringify([...tips, popData.title]),
+                            );
+                          }}
+                        >
+                          Add to Favourite
+                        </Button>
                         <p>
                           <span role="img" aria-label="emoji movie">
                             🎞 Released:

@@ -6,11 +6,11 @@ export default function Header() {
   const router = useRouter();
 
   const navLinks = [
-    { name: 'Home', url: '/' },
+    { name: 'Movie', url: '/' },
     { name: 'TV', url: '/tv' },
-    { name: 'Favourite', url: '/favourite' },
     { name: 'Tips&Ideas', url: '/tips' },
     { name: 'Search Actor', url: '/actor' },
+    { name: 'Favourite', url: '/favourite' },
   ];
   return (
     <div className="header">

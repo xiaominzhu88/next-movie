@@ -3,19 +3,35 @@ import Head from 'next/head';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import { useFetch } from './useFetch';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
-export default function Home() {
+const useStyles = makeStyles({
+  root: {
+    background: 'linear-gradient(45deg, #fe6bfd 15%, #3F51B5 90%)',
+    border: 0,
+    borderRadius: 5,
+    boxShadow: '0 3px 5px 2px rgb(204 192 206)',
+    color: 'white',
+    height: 28,
+    padding: '0 30px',
+    margin: '1em',
+    fontSize: '0.8em',
+    fontFamily: 'monospace',
+  },
+});
+
+export default function Movie() {
   const [input, setInput] = useState('a');
   const [year, setYear] = useState(2020);
   const [open, setOpen] = useState(false);
+
   const apiKey = process.env.MovieKey;
+
+  const classes = useStyles();
 
   const handleInput = (e) => {
     setInput(e.target.value);
-  };
-
-  const handleClick = () => {
-    setOpen((prev) => !prev);
   };
 
   const data = useFetch(
@@ -86,36 +102,67 @@ export default function Home() {
                 {data.length !== 0
                   ? data.map((item, i) => {
                       return (
-                        <li key={item.id}>
-                          <h2
-                            onClick={handleClick}
-                            style={{ cursor: 'pointer' }}
-                          >
-                            {item.original_title}
-                          </h2>
+                        <>
+                          <li key={item.id}>
+                            <div className="title">
+                              <h2
+                                onClick={() => {
+                                  setOpen((prev) => !prev);
+                                }}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                {item.original_title}
+                              </h2>
+                            </div>
+                            <div className="parent">
+                              <img
+                                src={
+                                  item.poster_path
+                                    ? `https://image.tmdb.org/t/p/w342/${item.poster_path}`
+                                    : '/imgError.jpg'
+                                }
+                                alt="movie images"
+                              />
+                              <div
+                                className="text"
+                                style={{
+                                  display: open ? 'block' : 'none',
+                                  overflow: 'scroll',
+                                  height: '5em',
+                                  margin: '0.2em auto',
+                                }}
+                              >
+                                {item.overview || 'Ops, no description'}
+                              </div>
+                            </div>
+                            <Button
+                              className={classes.root}
+                              onClick={() => {
+                                const favoMovies =
+                                  JSON.parse(
+                                    window.localStorage.getItem('favoMovies'),
+                                  ) || [];
 
-                          <div className="parent">
-                            <img
-                              src={
-                                item.poster_path
-                                  ? `https://image.tmdb.org/t/p/w342/${item.poster_path}`
-                                  : '/imgError.jpg'
-                              }
-                              alt="movie images"
-                            />
-                            <div
-                              className="text"
-                              style={{
-                                display: open ? 'block' : 'none',
-                                overflow: 'scroll',
-                                height: '5em',
-                                margin: '0.2em auto',
+                                if (
+                                  favoMovies.indexOf(item.original_title) === -1
+                                ) {
+                                  window.localStorage.setItem(
+                                    'favoMovies',
+                                    JSON.stringify([
+                                      ...favoMovies,
+                                      item.original_title,
+                                    ]),
+                                  );
+                                  alert('Saved to favourite page');
+                                } else {
+                                  alert('Favourite already exist');
+                                }
                               }}
                             >
-                              {item.overview || 'Ops, no description'}
-                            </div>
-                          </div>
-                        </li>
+                              add to favourite
+                            </Button>{' '}
+                          </li>
+                        </>
                       );
                     })
                   : 'Search for some Movie? '}
@@ -180,7 +227,6 @@ export default function Home() {
           background-color: #618dbe;
           padding: 5px;
           transition: all 0.5s ease;
-          border: 1px solid #fff;
           border-radius: 5px;
           font-family: monospace;
           overflow-x: scroll;
@@ -188,9 +234,15 @@ export default function Home() {
           width: 20vw;
           font-size: 1em;
         }
+
         h2:hover {
           background-color: #f3f8fa;
           color: #618dbe;
+          border: 1px #618dbe solid;
+        }
+        .title {
+          display: flex;
+          justify-content: center;
         }
         p {
           color: #09426f;

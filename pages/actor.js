@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     '& > *': {
       margin: theme.spacing(1),
       width: '25ch',
+      borderBottom: '1px solid #fff',
     },
   },
 }));
