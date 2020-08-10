@@ -2,12 +2,26 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 //import Footer from '../Components/Footer';
 import Header from '../Components/Header';
-import Namelist from '../Components/Namelist';
 import { makeStyles } from '@material-ui/core/styles';
-
 import TextField from '@material-ui/core/TextField';
-
 import { useFetch } from './useFetch';
+import dynamic from 'next/dynamic';
+
+const Namelist = dynamic(() => import('../Components/Namelist'), {
+  loading: () => (
+    <div
+      style={{
+        textAlign: 'center',
+        fontSize: '2em',
+        margin: '5em auto',
+        color: '#fff',
+        fontFamily: 'monospace',
+      }}
+    >
+      <p>Loading...</p>
+    </div>
+  ),
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +63,7 @@ export default function Search() {
     <div>
       <Head>
         <title>Search actor</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.jpg" />
         <meta
           name="description search movie with actor"
           content="movie search with actor"

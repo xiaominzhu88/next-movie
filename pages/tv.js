@@ -77,7 +77,7 @@ export default function Tv() {
     <div className="tv">
       <Head>
         <title>TV search</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.jpg" />
         <meta name="description popular tv search" content="TV search" />
       </Head>
       <div className="wrapper">

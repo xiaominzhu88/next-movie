@@ -57,7 +57,7 @@ export default function Movie() {
     <div className="App">
       <Head>
         <title>Movie Next</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.jpg" />
         <meta
           name="description search movie with names and years"
           content="movie search with names and years"

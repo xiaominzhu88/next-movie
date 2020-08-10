@@ -93,7 +93,7 @@ export default function Tips() {
     <div>
       <Head>
         <title>Tips and Ideas</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.jpg" />
         <meta name="description popular tv search" content="TV search" />
       </Head>
       <div className="TipsContainer">
