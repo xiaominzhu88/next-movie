@@ -7,12 +7,12 @@ export default function Namelist({ nameData }) {
         ? nameData.map((el, i) => {
             const knownfor = el.known_for.map((film) => film.original_title);
             const paths = el.known_for.map((path) => path.poster_path);
-            const ids = el.known_for.map((id) => id.id);
             const department = el.known_for_department;
 
             return (
-              <ul key={ids.map((id) => id)}>
+              <ul key={i}>
                 <div
+                  key={i - 1}
                   style={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -33,6 +33,7 @@ export default function Namelist({ nameData }) {
                   <p style={{ marginLeft: '5px' }}>movie</p>
                 </div>
                 <div
+                  key={`department_${el.id}`}
                   style={{
                     display: 'block',
                     color: 'hotpink',
@@ -52,7 +53,7 @@ export default function Namelist({ nameData }) {
                       })
                     : null}{' '}
                 </div>
-                <div className="imgs" key={ids.map((id) => id + 1)}>
+                <div className="imgs" key={i + 1}>
                   {paths &&
                     paths.map((path, j) => {
                       return (

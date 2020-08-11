@@ -6,10 +6,10 @@ export default function Header() {
   const router = useRouter();
 
   const navLinks = [
-    { name: 'Movie', url: '/' },
-    { name: 'TV', url: '/tv' },
-    { name: 'Tips&Ideas', url: '/tips' },
-    { name: 'Search Actor', url: '/actor' },
+    { name: 'Movie', url: '/' }, //useFetch => useDebounce
+    { name: 'TV', url: '/tv' }, //useSWR
+    { name: 'Search Actor', url: '/actor' }, //useDebounce
+    { name: 'Tips&Ideas', url: '/tips' }, // useFetch
     { name: 'Favourite', url: '/favourite' },
   ];
   return (

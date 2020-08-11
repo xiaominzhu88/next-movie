@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
-import { useFetch } from './useFetch';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import useDebounce from './use-debounce';
 
 const useStyles = makeStyles({
   root: {
@@ -24,19 +24,34 @@ const useStyles = makeStyles({
 export default function Movie() {
   const [input, setInput] = useState('a');
   const [year, setYear] = useState(2020);
+  const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
-
-  const apiKey = process.env.MovieKey;
 
   const classes = useStyles();
 
-  const handleInput = (e) => {
-    setInput(e.target.value);
-  };
+  const apiKey = process.env.MovieKey;
+  const debouncedSearchTerm = useDebounce(input, year, 500);
 
-  const data = useFetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${input}&include_adult=false&region=us&year=${year}`,
-  );
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      const fetchResults = async () => {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${debouncedSearchTerm}&include_adult=false&region=us&year=${year}`,
+        );
+        const json = await response.json();
+        const dataResults = json.results;
+        setData(dataResults || []);
+      };
+      fetchResults();
+    }
+  }, [debouncedSearchTerm, apiKey, input, year]);
+
+  console.log('DATA:', data);
+
+  // const data = useFetch(
+  //   `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${input}&include_adult=false&region=us&year=${year}`,
+  // );
+
   if (!data) {
     return (
       <div
@@ -83,89 +98,100 @@ export default function Movie() {
               <span>~~~~~~~~~~~~~~</span>
             </div>
             <div className="images">
+              <p>Select Year: </p>
+              <input
+                type="number"
+                min="1900"
+                max="2023"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+              />
               <p>Search your Movie:</p>
               <input
                 type="text"
                 minLength="1"
                 value={input}
-                onChange={(e) => handleInput(e)}
-              />
-              <p>Select Year: </p>
-              <input
-                type="number"
-                min="1900"
-                max="2020"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
+                onChange={(e) => setInput(e.target.value)}
               />
               <ul>
-                {data.length !== 0
-                  ? data.map((item, i) => {
-                      return (
-                        <li key={item.id}>
-                          <div className="title">
-                            <h2
-                              onClick={() => {
-                                setOpen((prev) => !prev);
-                              }}
-                              style={{ cursor: 'pointer' }}
-                            >
-                              {item.original_title}
-                            </h2>
-                          </div>
-                          <div className="parent" key={item.id}>
-                            <img
-                              src={
-                                item.poster_path
-                                  ? `https://image.tmdb.org/t/p/w342/${item.poster_path}`
-                                  : '/imgError.jpg'
-                              }
-                              alt="movie images"
-                            />
-                            <div
-                              key={item.id + 'movie'}
-                              className="text"
-                              style={{
-                                display: open ? 'block' : 'none',
-                                overflow: 'scroll',
-                                height: '5em',
-                                margin: '0.2em auto',
-                              }}
-                            >
-                              {item.overview || 'Ops, no description'}
-                            </div>
-                          </div>
-                          <Button
-                            key={item.id + item.original_title}
-                            className={classes.root}
+                {data.length !== 0 ? (
+                  data.map((item, i) => {
+                    return (
+                      <li key={item.id}>
+                        <div className="title">
+                          <h2
                             onClick={() => {
-                              const favoMovies =
-                                JSON.parse(
-                                  window.localStorage.getItem('favoMovies'),
-                                ) || [];
-
-                              if (
-                                favoMovies.indexOf(item.original_title) === -1
-                              ) {
-                                window.localStorage.setItem(
-                                  'favoMovies',
-                                  JSON.stringify([
-                                    ...favoMovies,
-                                    item.original_title,
-                                  ]),
-                                );
-                                alert('Saved to favourite page');
-                              } else {
-                                alert('Favourite already exist');
-                              }
+                              setOpen((prev) => !prev);
+                            }}
+                            style={{ cursor: 'pointer' }}
+                          >
+                            {item.original_title}
+                          </h2>
+                        </div>
+                        <div className="parent" key={item.id}>
+                          <img
+                            src={
+                              item.poster_path
+                                ? `https://image.tmdb.org/t/p/w342/${item.poster_path}`
+                                : '/imgError.jpg'
+                            }
+                            alt="movie images"
+                          />
+                          <div
+                            key={item.id + 'movie'}
+                            className="text"
+                            style={{
+                              display: open ? 'block' : 'none',
+                              overflow: 'scroll',
+                              height: '5em',
+                              margin: '0.2em auto',
                             }}
                           >
-                            add to favourite
-                          </Button>{' '}
-                        </li>
-                      );
-                    })
-                  : 'Search for some Movie? '}
+                            {item.overview || 'Ops, no description'}
+                            <br />
+                            Year: {item.release_date}
+                          </div>
+                        </div>
+                        <Button
+                          key={item.id + item.original_title}
+                          className={classes.root}
+                          onClick={() => {
+                            const favoMovies =
+                              JSON.parse(
+                                window.localStorage.getItem('favoMovies'),
+                              ) || [];
+
+                            if (
+                              favoMovies.indexOf(item.original_title) === -1
+                            ) {
+                              window.localStorage.setItem(
+                                'favoMovies',
+                                JSON.stringify([
+                                  ...favoMovies,
+                                  item.original_title,
+                                ]),
+                              );
+                              alert('Saved to favourite page');
+                            } else {
+                              alert('Favourite already exist');
+                            }
+                          }}
+                        >
+                          add to favourite
+                        </Button>{' '}
+                      </li>
+                    );
+                  })
+                ) : (
+                  <p
+                    style={{
+                      textShadow: 'rgb(112 110 110) 0px 2px 3px',
+                      color: '#eb1f85',
+                    }}
+                  >
+                    No results, search more movie?
+                  </p>
+                )}
               </ul>
               )
             </div>

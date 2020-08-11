@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 //import Footer from '../Components/Footer';
 import Header from '../Components/Header';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { useFetch } from './useFetch';
 import dynamic from 'next/dynamic';
+import useDebounce from './use-debounce';
 
 const Namelist = dynamic(() => import('../Components/Namelist'), {
   loading: () => (
@@ -23,42 +22,50 @@ const Namelist = dynamic(() => import('../Components/Namelist'), {
   ),
 });
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-      borderBottom: '1px solid #fff',
-    },
-  },
-}));
-
 export default function Search() {
   const [name, setName] = useState('brad');
-  const classes = useStyles();
+  const [data, setData] = useState([]);
 
   const apiKey = process.env.MovieKey;
 
-  const nameData = useFetch(
-    `https://api.themoviedb.org/3/search/person?api_key=${apiKey}&language=en-US&query=${name}&include_adult=false`,
-  );
-  console.log('NAMEDATA: ', nameData);
+  const debouncedSearchTerm = useDebounce(name, 500);
 
-  if (!nameData) {
-    return (
-      <div
-        style={{
-          textAlign: 'center',
-          fontSize: '2em',
-          margin: '5em auto',
-          color: 'hotpink',
-          fontFamily: 'monospace',
-        }}
-      >
-        <p>Loading...</p>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      const fetchResults = async () => {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/search/person?api_key=${apiKey}&language=en-US&query=${debouncedSearchTerm}&include_adult=false`,
+        );
+        const json = await res.json();
+        const dataResults = json.results;
+
+        setData(dataResults || []);
+      };
+      fetchResults();
+    }
+  }, [debouncedSearchTerm, apiKey, name]);
+
+  // const nameData = useFetch(
+  //   `https://api.themoviedb.org/3/search/person?api_key=${apiKey}&language=en-US&query=${name}&include_adult=false`,
+  // );
+  // console.log('NAMEDATA: ', nameData);
+
+  // if (!nameData) {
+  //   return (
+  //     <div
+  //       style={{
+  //         textAlign: 'center',
+  //         fontSize: '2em',
+  //         margin: '5em auto',
+  //         color: 'hotpink',
+  //         fontFamily: 'monospace',
+  //       }}
+  //     >
+  //       <p>Loading...</p>
+  //     </div>
+  //   );
+  // }
+
   return (
     <div>
       <Head>
@@ -71,30 +78,47 @@ export default function Search() {
       </Head>
       <main>
         <Header />
+
         <div className="search">
           <div className="searchActor">
             <form
-              className={classes.root}
-              noValidate
-              autoComplete="off"
               style={{
                 margin: '0 auto',
                 textAlign: 'center',
-                padding: '1em',
+                padding: '2em',
               }}
             >
               <TextField
-                className={classes.margin}
+                style={{
+                  borderBottom: '1px solid #fff',
+                  width: '20vw',
+                }}
                 label="Search Actor"
-                variant="outlined"
-                id="outlined-basic"
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
               />
             </form>
           </div>
-          <Namelist nameData={nameData} />
+          {/* {!data ? (
+            <p
+              style={{
+                textAlign: 'center',
+                fontSize: '2em',
+                margin: '5em auto',
+                color: 'hotpink',
+                fontFamily: 'monospace',
+              }}
+            >
+              Loading...
+            </p>
+          ) : ( */}
+          <Namelist
+            // nameData={nameData}
+            nameData={data}
+          />
+
+          {/* )} */}
         </div>
       </main>
       <style jsx>{`
