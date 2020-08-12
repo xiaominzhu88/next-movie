@@ -17,7 +17,7 @@ const descriptions = [
     src: '/moviePage.png',
     url: '/about/1',
     name: 'Movie',
-    description: 'Search for movies with name and year',
+    description: 'Search movies with names and years',
   },
   {
     id: 2,

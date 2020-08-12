@@ -6,6 +6,7 @@ export default function Header() {
   const router = useRouter();
 
   const navLinks = [
+    { name: 'About', url: '/about' },
     { name: 'Movie', url: '/' }, //useFetch => useDebounce
     { name: 'TV', url: '/tv' }, //useSWR
     { name: 'Search Actor', url: '/actor' }, //useDebounce
