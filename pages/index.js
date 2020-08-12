@@ -74,9 +74,11 @@ export default function Movie() {
       <Head>
         <title>Movie Next</title>
         <link rel="icon" href="/favicon.jpg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="utf-8" />
         <meta
-          name="description search movie with names and years"
-          content="movie search with names and years"
+          name="description search movies by name and year"
+          content="movies search by name and year"
         />
       </Head>
 

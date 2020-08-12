@@ -94,7 +94,12 @@ export default function Tips() {
       <Head>
         <title>Tips and Ideas</title>
         <link rel="icon" href="/favicon.jpg" />
-        <meta name="description popular tv search" content="TV search" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="utf-8" />
+        <meta
+          name="description view popular tvs and movies"
+          content="overview popular tvs and movies"
+        />
       </Head>
       <div className="TipsContainer">
         <Header />

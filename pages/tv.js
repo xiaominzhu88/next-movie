@@ -78,7 +78,9 @@ export default function Tv() {
       <Head>
         <title>TV search</title>
         <link rel="icon" href="/favicon.jpg" />
-        <meta name="description popular tv search" content="TV search" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="utf-8" />
+        <meta name="description get popular tvs " content="get popular tvs" />
       </Head>
       <div className="wrapper">
         <Header />

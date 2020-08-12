@@ -9,11 +9,14 @@ export default function About({ description }) {
       <div className="About">
         <Head>
           <title>Movie Next</title>
-          <link rel="icon" href="/favicon.jpg" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta charSet="utf-8" />
           <meta
-            name="description search movie with names and years"
-            content="movie search with names and years"
+            name="descriptions about all the pages"
+            content="view descriptions video about all the pages"
           />
+
+          <link rel="icon" href="/favicon.jpg" />
         </Head>
         <Header />
 

@@ -50,9 +50,11 @@ export default function Search() {
       <Head>
         <title>Search actor</title>
         <link rel="icon" href="/favicon.jpg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="utf-8" />
         <meta
-          name="description search movie with actor"
-          content="movie search with actor"
+          name="description search movies by actor"
+          content="movies search by actor"
         />
       </Head>
       <main>

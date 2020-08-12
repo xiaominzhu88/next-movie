@@ -10,7 +10,7 @@ export default function Description({ useInfo }) {
       <Head>
         <title>About</title>
         <link rel="icon" href="/favicon.jpg" />
-        <meta name="description about " content=" description about" />
+        <meta name="description about viewport" content=" description about" />
       </Head>
       <Header />
       <main>
@@ -42,7 +42,16 @@ export default function Description({ useInfo }) {
           </span>
         </Button>
       </div>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        main {
+          text-align: center;
+          margin: 1.5em auto;
+        }
+        p {
+          width: 50vw;
+          margin: 2em auto;
+        }
+      `}</style>
     </div>
   );
 }
