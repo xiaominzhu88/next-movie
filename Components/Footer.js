@@ -1,9 +1,13 @@
 import React from 'react';
-
+import Link from 'next/link';
 export default function Footer() {
   return (
     <div className="footer">
-      <p>About Us</p>
+      <Link href="/about">
+        <a>
+          <p>About Us</p>
+        </a>
+      </Link>
       <p>Contact</p>
       <div>
         <p>@</p>

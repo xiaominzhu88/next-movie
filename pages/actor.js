@@ -45,27 +45,6 @@ export default function Search() {
     }
   }, [debouncedSearchTerm, apiKey, name]);
 
-  // const nameData = useFetch(
-  //   `https://api.themoviedb.org/3/search/person?api_key=${apiKey}&language=en-US&query=${name}&include_adult=false`,
-  // );
-  // console.log('NAMEDATA: ', nameData);
-
-  // if (!nameData) {
-  //   return (
-  //     <div
-  //       style={{
-  //         textAlign: 'center',
-  //         fontSize: '2em',
-  //         margin: '5em auto',
-  //         color: 'hotpink',
-  //         fontFamily: 'monospace',
-  //       }}
-  //     >
-  //       <p>Loading...</p>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div>
       <Head>
@@ -100,25 +79,8 @@ export default function Search() {
               />
             </form>
           </div>
-          {/* {!data ? (
-            <p
-              style={{
-                textAlign: 'center',
-                fontSize: '2em',
-                margin: '5em auto',
-                color: 'hotpink',
-                fontFamily: 'monospace',
-              }}
-            >
-              Loading...
-            </p>
-          ) : ( */}
-          <Namelist
-            // nameData={nameData}
-            nameData={data}
-          />
 
-          {/* )} */}
+          <Namelist nameData={data} />
         </div>
       </main>
       <style jsx>{`

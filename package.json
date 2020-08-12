@@ -6,7 +6,8 @@
     "dev": "next dev",
     "devWithPostgres": "run-p build postgres",
     "build": "next build && echo Done!",
-    "start": "next start -p ${PORT:-\"3000\"}"
+    "start": "next start -p ${PORT:-\"3000\"}",
+    "migrate": "dotenv -e .env.local ley"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -14,8 +15,11 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/styles": "^4.10.0",
     "dotenv": "^8.2.0",
+    "dotenv-cli": "^3.2.0",
     "eslint-plugin-react-hooks": "^0.0.0-7f28234f8",
+    "ley": "^0.5.0",
     "next": "9.5.1",
+    "postgres": "^1.0.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-toastify": "^6.0.8",

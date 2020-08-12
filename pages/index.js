@@ -5,6 +5,7 @@ import Header from '../Components/Header';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import useDebounce from './use-debounce';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles({
   root: {
@@ -22,8 +23,8 @@ const useStyles = makeStyles({
 });
 
 export default function Movie() {
-  const [input, setInput] = useState('a');
-  const [year, setYear] = useState(2020);
+  const [input, setInput] = useState('minions');
+  const [year, setYear] = useState(2019);
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
 
@@ -100,19 +101,32 @@ export default function Movie() {
             <div className="images">
               <p>Select Year: </p>
               <input
+                className="selectYear"
                 type="number"
                 min="1900"
                 max="2023"
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
               />
-              <p>Search your Movie:</p>
-              <input
-                type="text"
-                minLength="1"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-              />
+              <form
+                style={{
+                  margin: '0 auto',
+                  textAlign: 'center',
+                  padding: '2em',
+                }}
+              >
+                <p>Search your Movie:</p>
+                <TextField
+                  type="text"
+                  minLength="1"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  style={{
+                    borderBottom: '1px solid #eb1f85',
+                    width: '20vw',
+                  }}
+                />
+              </form>
               <ul>
                 {data.length !== 0 ? (
                   data.map((item, i) => {
@@ -193,7 +207,6 @@ export default function Movie() {
                   </p>
                 )}
               </ul>
-              )
             </div>
           </div>
         </div>
@@ -244,7 +257,7 @@ export default function Movie() {
           align-items: flex-start;
           list-style: none;
           margin: 1em auto;
-          padding: 2em;
+          padding: 4em;
         }
 
         h2 {
@@ -293,6 +306,15 @@ export default function Movie() {
           color: #ffffff;
           width: 100%;
           padding: 20px;
+        }
+        .selectYear {
+          width: 6em;
+          height: 2em;
+          border-radius: 5px;
+          border: 2px solid #618dbe;
+        }
+        .selectYear:focus {
+          outline: none;
         }
 
         @media (max-width: 600px) {
