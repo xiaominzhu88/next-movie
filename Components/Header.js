@@ -33,9 +33,10 @@ export default function Header() {
       <style jsx>{`
         h1 {
           letter-spacing: 0.2em;
-          font-family: serif;
+          font-family: monospace;
           text-shadow: 6px 5px 13px rgb(143 193 233);
           color: #578fbc;
+          font-size: 2.5em;
         }
         .typing h1 {
           overflow: hidden;
