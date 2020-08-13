@@ -81,6 +81,31 @@ export default function Description({ useInfo }) {
         .back {
           background-color: #346e9c;
         }
+        @media (max-width: 700px) {
+          video {
+            height: 150px;
+            width: 270px;
+            margin: 1em;
+          }
+          h1 {
+            font-size: 1.5em;
+          }
+          p {
+            margin: 1em auto;
+            font-size: 1em;
+          }
+          h3 {
+            background-color: #2196f37a;
+            color: #fff;
+            padding: 10px;
+          }
+          @media (max-width: 400px) {
+            video {
+              height: 130px;
+              width: 220px;
+            }
+          }
+        }
       `}</style>
     </div>
   );

@@ -72,7 +72,7 @@ export default function Search() {
               <TextField
                 style={{
                   borderBottom: '1px solid #fff',
-                  width: '20vw',
+                  width: '45vw',
                 }}
                 label="Search Actor"
                 onChange={(e) => {

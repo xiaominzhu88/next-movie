@@ -124,8 +124,8 @@ export default function Movie() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   style={{
-                    borderBottom: '1px solid #eb1f85',
-                    width: '20vw',
+                    borderBottom: '1px solid rgb(209 39 224)',
+                    width: '30vw',
                   }}
                 />
               </form>
@@ -329,6 +329,18 @@ export default function Movie() {
             height: 2.2em;
             width: 160px;
             font-size: 0.9em;
+          }
+          p {
+            font-size: 0.8em;
+          }
+          ul {
+            margin: 4em auto;
+            padding: 0.6em;
+          }
+          .home {
+            width: 85vw;
+            margin: -4em auto;
+            padding: 0.8em;
           }
         }
       `}</style>

@@ -19,6 +19,7 @@ export default function Namelist({ nameData }) {
                     alignItems: 'center',
                     color: '#03A9F4',
                   }}
+                  className="title"
                 >
                   <h2
                     style={{
@@ -86,6 +87,22 @@ export default function Namelist({ nameData }) {
         }
         ul {
           list-style: none;
+        }
+        @media (max-width: 600px) {
+          li {
+            width: 43vw;
+            font-size: 0.8em;
+          }
+          img {
+            width: 50%;
+          }
+          .title {
+            width: 20vw;
+            margin: 0 auto;
+          }
+          h2 {
+            font-size: 1em;
+          }
         }
       `}</style>
     </>

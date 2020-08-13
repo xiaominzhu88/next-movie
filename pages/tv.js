@@ -132,7 +132,7 @@ export default function Tv() {
                   style={{ display: showText ? 'block' : 'none' }}
                 >
                   {tv.overview || (
-                    <>
+                    <div>
                       <p>
                         <span role="img" aria-label="language emoji">
                           🧚‍♀️
@@ -145,7 +145,7 @@ export default function Tv() {
                         </span>
                         Popularity: {tv.popularity}
                       </p>
-                    </>
+                    </div>
                   )}
                 </div>
                 <img
@@ -287,6 +287,24 @@ export default function Tv() {
             height: 2.2em;
             width: 160px;
             font-size: 0.9em;
+          }
+          .info {
+            width: 65vw;
+          }
+          h3 {
+            font-size: 0.6em;
+          }
+          ul {
+            padding: 0.8em;
+            margin: 0em auto;
+            text-align: center;
+          }
+          img {
+            width: 150px;
+            height: 200px;
+          }
+          .overview {
+            width: 35%;
           }
         }
       `}</style>

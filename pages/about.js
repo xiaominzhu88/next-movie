@@ -107,6 +107,26 @@ export default function About({ description }) {
           line-height: 2em;
           letter-spacing: 0.2em;
         }
+        @media (max-width: 700px) {
+          ul {
+            display: block;
+          }
+          img {
+            width: 60vw;
+            height: 25vh;
+          }
+          h2 {
+            font-size: 1em;
+            padding: 1em;
+          }
+          h3 {
+            font-size: 0.8em;
+          }
+          li {
+            padding: 0.8em;
+            margin: 0.8em;
+          }
+        }
       `}</style>
     </>
   );
