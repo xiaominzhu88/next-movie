@@ -29,7 +29,8 @@ export default function Movie() {
   const [open, setOpen] = useState(false);
 
   const classes = useStyles();
-
+  // created .env.local file to store apikey
+  // export modules with apikey from next.config.js file
   const apiKey = process.env.MovieKey;
   const debouncedSearchTerm = useDebounce(input, year, 500);
 
