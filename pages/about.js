@@ -24,7 +24,8 @@ export default function About({ description }) {
           <h2>
             Use your own words, or search with titles, <br />
             actors, names, years etc. <br />
-            We find movies for you 🎞
+            We find movies for you <br />
+            ~~ 🎞 ~~
           </h2>
         </div>
         <div className="container all-box">
@@ -125,6 +126,11 @@ export default function About({ description }) {
           li {
             padding: 0.8em;
             margin: 0.8em;
+          }
+        }
+        @media (max-width: 1090px) {
+          ul {
+            display: block;
           }
         }
       `}</style>

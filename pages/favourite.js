@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../Components/Header';
 import Head from 'next/head';
+import Footer from '../Components/Footer';
 import Router from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -177,13 +178,19 @@ export default function Favourite() {
         style={{
           display: 'flex',
           justifyContent: 'center',
-          margin: '1em auto',
+          flexWrap: 'wrap',
+          margin: '0 auto',
+          padding: '1em',
         }}
       >
         <button onClick={() => Router.push('/')}>Movie</button>
         <button onClick={() => Router.push('/tv')}>TV </button>
         <button onClick={() => Router.push('/tips')}>Tips&Ideas </button>
         <button onClick={() => Router.push('/actor')}>Actor</button>
+      </div>
+
+      <div style={{ margin: '1em auto' }}>
+        <Footer />
       </div>
 
       <style jsx>{`
@@ -231,6 +238,18 @@ export default function Favourite() {
           background-color: #ced7dee3;
           color: #2196f3e3;
           border: 1px solid #2196f3e3;
+        }
+        @media (max-width: 600px) {
+          ul {
+            font-size: 0.8em;
+            text-align: left;
+          }
+          h3 {
+            font-size: 1.2em;
+          }
+          li {
+            line-height: 1.8em;
+          }
         }
       `}</style>
     </div>

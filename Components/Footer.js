@@ -28,6 +28,14 @@ export default function Footer() {
           width: 100vw;
           font-family: monospace;
         }
+        @media (max-width: 600px) {
+          .footer {
+            bottom: 0;
+            position: fixed;
+            width: 100%;
+            height: 40px;
+          }
+        }
       `}</style>
     </div>
   );

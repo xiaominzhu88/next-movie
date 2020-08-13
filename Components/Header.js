@@ -34,20 +34,21 @@ export default function Header() {
         h1 {
           letter-spacing: 0.2em;
           font-family: monospace;
-          text-shadow: 6px 5px 13px rgb(143 193 233);
+          text-shadow: 6px 5px 11px rgb(143 193 233);
           color: #578fbc;
           font-size: 2.5em;
         }
         .typing h1 {
-          overflow: hidden;
-          animation: typing 3s steps(50, end);
+          animation-name: movelok;
+          animation-duration: 10s;
+          animation-iteration-count: infinite;
         }
-        @keyframes typing {
+        @keyframes movelok {
           from {
-            width: 50%;
+            transform: translateX(5vw);
           }
           to {
-            width: 100%;
+            transform: translateX(20vw);
           }
         }
         .nav {
@@ -58,9 +59,13 @@ export default function Header() {
           box-shadow: 3px 11px 18px #b3d1e9;
           text-align: center;
           padding: 25px;
+          display: flex;
+          flex-wrap: wrap;
         }
         .links {
           display: flex;
+          flex-wrap: wrap;
+
           justify-content: space-around;
           align-items: center;
           font-size: 1em;
@@ -87,24 +92,49 @@ export default function Header() {
         @media (max-width: 700px) {
           h1 {
             font-size: 1.6em;
+            text-shadow: 1px 2px 3px rgb(143 193 233);
           }
-          .nav {
-            display: flex;
-            flex-direction: column;
-          }
+
           p {
             font-size: 0.7em;
           }
           .links {
             display: flex;
             flex-direction: column;
-            align-content: space-between;
             font-size: 0.8em;
             letter-spacing: 0.2em;
+            padding: 1em;
           }
           a {
             line-height: 1.5em;
           }
+          .typing h1 {
+            animation-name: movelok;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+          }
+          @keyframes movelok {
+            from {
+              transform: translateX(0);
+            }
+            to {
+              transform: translateX(5vw);
+            }
+          }
+          @media (min-width:700px and max-width: 950px) {
+            .typing h1 {
+              animation-name: movelok;
+              animation-duration: 3s;
+              animation-iteration-count: infinite;
+            }
+            @keyframes movelok {
+              from {
+                transform: translateX(0);
+              }
+              to {
+                transform: translateX(3vw);
+              }
+            }
         }
       `}</style>
     </div>

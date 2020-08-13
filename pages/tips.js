@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Header from '../Components/Header';
-//import Footer from '../Components/Footer';
 import Head from 'next/head';
 import { useFetch } from '../hooks/useFetch';
 import { withStyles } from '@material-ui/core/styles';
@@ -133,6 +132,7 @@ export default function Tips() {
           justifyContent: 'space-around',
           alignItems: 'center',
           margin: '2em auto',
+          padding: '1em',
         }}
       >
         <FormControlLabel
@@ -226,7 +226,6 @@ export default function Tips() {
           </Fade>
         </ul>
       </div>
-      {/* <Footer /> */}
       <style jsx>{`
         .popButton {
           margin: 1em auto;
@@ -285,6 +284,15 @@ export default function Tips() {
           color: #ffffff;
           width: 100%;
           padding: 20px;
+        }
+        @media (max-width: 600px) {
+          img {
+            width: 160px;
+            height: 240px;
+          }
+          h2 {
+            width: 40vw;
+          }
         }
       `}</style>
     </div>
