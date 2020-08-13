@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Header from '../Components/Header';
 import TextField from '@material-ui/core/TextField';
 import dynamic from 'next/dynamic';
-import useDebounce from './use-debounce';
+import useDebounce from '../hooks/useDebounce';
 
 const Namelist = dynamic(() => import('../Components/Namelist'), {
   loading: () => (

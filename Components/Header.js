@@ -7,7 +7,7 @@ export default function Header() {
 
   const navLinks = [
     { name: 'About', url: '/about' },
-    { name: 'Movie', url: '/' }, //useFetch => useDebounce
+    { name: 'Movie', url: '/' }, //useDebounce
     { name: 'TV', url: '/tv' }, //useSWR
     { name: 'Search Actor', url: '/actor' }, //useDebounce
     { name: 'Tips&Ideas', url: '/tips' }, // useFetch

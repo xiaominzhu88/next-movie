@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from '../Components/Header';
 //import Footer from '../Components/Footer';
 import Head from 'next/head';
-import { useFetch } from './useFetch';
+import { useFetch } from '../hooks/useFetch';
 import { withStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -56,6 +56,7 @@ export default function Tips() {
     setChecked((prev) => !prev);
     setToggle(true);
   };
+
   const data = useFetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`,
   );
