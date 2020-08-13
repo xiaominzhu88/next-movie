@@ -62,29 +62,13 @@ Then, to connect to the database using this new user, quit `psql` and reconnect:
 psql -U <user name> <database name>
 ```
 
--- you could use \connect <database name> to connect to an other database, but you have no permission for table product
+- you could use \connect <database name> to connect to an other database, but you have no permission for table product
 
 Migrations are set up with Ley.
 
 - [ ] [`ley`](https://github.com/lukeed/ley)
 
 - [ ] [`postgres`](https://www.npmjs.com/package/postgres)
-
-<div align="center">
-  <img src="shots/logo.png" alt="ley" height="200" />
-</div>
-
-<div align="center">
-  <a href="https://npmjs.org/package/ley">
-    <img src="https://badgen.net/npm/v/ley" alt="version" />
-  </a>
-  <a href="https://github.com/lukeed/ley/actions">
-    <img src="https://badgen.net/github/status/lukeed/ley" alt="status" />
-  </a>
-  <a href="https://npmjs.org/package/ley">
-    <img src="https://badgen.net/npm/dm/ley" alt="downloads" />
-  </a>
-</div>
 
 # Database migrations
 
