@@ -6,8 +6,8 @@ export default function Header() {
   const router = useRouter();
 
   const navLinks = [
-    { name: 'About', url: '/about' },
-    { name: 'Movie', url: '/' }, //useDebounce
+    { name: 'About', url: '/' },
+    { name: 'Movie', url: '/movie' }, //useDebounce
     { name: 'TV', url: '/tv' }, //useSWR
     { name: 'Search Actor', url: '/actor' }, //useDebounce
     { name: 'Tips&Ideas', url: '/tips' }, // useFetch
@@ -28,7 +28,7 @@ export default function Header() {
             </Link>
           );
         })}
-        <p>SIGN UP | LOG IN</p>
+        {/* <p>SIGN UP | LOG IN</p> */}
       </div>
       <style jsx>{`
         h1 {
@@ -40,7 +40,7 @@ export default function Header() {
         }
         .typing h1 {
           animation-name: movelok;
-          animation-duration: 10s;
+          animation-duration: 8s;
           animation-iteration-count: infinite;
         }
         @keyframes movelok {
@@ -48,7 +48,7 @@ export default function Header() {
             transform: translateX(5vw);
           }
           to {
-            transform: translateX(20vw);
+            transform: translateX(25vw);
           }
         }
         .nav {
@@ -60,12 +60,10 @@ export default function Header() {
           text-align: center;
           padding: 25px;
           display: flex;
-          flex-wrap: wrap;
         }
         .links {
           display: flex;
-          flex-wrap: wrap;
-
+          height: 3.8em;
           justify-content: space-around;
           align-items: center;
           font-size: 1em;
@@ -89,7 +87,8 @@ export default function Header() {
           color: #fff;
           text-decoration: underline;
         }
-        @media (max-width: 700px) {
+
+        @media (max-width: 800px) {
           h1 {
             font-size: 1.6em;
             text-shadow: 1px 2px 3px rgb(143 193 233);
@@ -99,11 +98,11 @@ export default function Header() {
             font-size: 0.7em;
           }
           .links {
-            display: flex;
-            flex-direction: column;
             font-size: 0.8em;
             letter-spacing: 0.2em;
             padding: 1em;
+            flex-direction: column;
+            height: auto;
           }
           a {
             line-height: 1.5em;
@@ -121,20 +120,6 @@ export default function Header() {
               transform: translateX(5vw);
             }
           }
-          @media (min-width:700px and max-width: 950px) {
-            .typing h1 {
-              animation-name: movelok;
-              animation-duration: 3s;
-              animation-iteration-count: infinite;
-            }
-            @keyframes movelok {
-              from {
-                transform: translateX(0);
-              }
-              to {
-                transform: translateX(3vw);
-              }
-            }
         }
       `}</style>
     </div>

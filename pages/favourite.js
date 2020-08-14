@@ -183,7 +183,7 @@ export default function Favourite() {
           padding: '1em',
         }}
       >
-        <button onClick={() => Router.push('/')}>Movie</button>
+        <button onClick={() => Router.push('/movie')}>Movie</button>
         <button onClick={() => Router.push('/tv')}>TV </button>
         <button onClick={() => Router.push('/tips')}>Tips&Ideas </button>
         <button onClick={() => Router.push('/actor')}>Actor</button>

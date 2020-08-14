@@ -41,7 +41,7 @@ export default function Description({ useInfo }) {
           variant="contained"
           color="inherit"
           style={{ color: 'red', margin: '1em auto' }}
-          onClick={() => Router.push('/about')}
+          onClick={() => Router.push('/')}
         >
           Back{' '}
           <span role="img" aria-label="emoji" style={{ marginLeft: '0.5em' }}>
@@ -58,6 +58,7 @@ export default function Description({ useInfo }) {
           background-size: cover;
           margin: 0;
           padding: 1.5em;
+          font-family: monospace;
         }
         h1 {
           color: #e44494;
@@ -95,9 +96,10 @@ export default function Description({ useInfo }) {
             font-size: 1em;
           }
           h3 {
-            background-color: #2196f37a;
+            background-color: #18465c78;
             color: #fff;
             padding: 10px;
+            font-size: 1em;
           }
           @media (max-width: 400px) {
             video {

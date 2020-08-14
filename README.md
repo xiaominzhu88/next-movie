@@ -24,6 +24,9 @@
 
 - Matrial-Ui Components from [Matrial-Ui](https://material-ui.com/)
 - Screen video recorder from [screencastify](https://www.screencastify.com/)
+- React bootstrap from [React Bootstrap](https://react-bootstrap.github.io/)
+- Icon from [react-share](https://www.npmjs.com/package/react-share)
+- Icon from [react-feather](https://www.npmjs.com/package/react-feather)
 - PostgreSQL database, migrations table
 - a readme with description, screenshots, technologies
 - 404 and error page
