@@ -13,7 +13,7 @@ export const useFetch = (url, ref) => {
       })
         .then((res) => res.json())
         .then((jsonData) => {
-          console.log('DATA:', jsonData);
+          //console.log('DATA:', jsonData);
           const dataResults = jsonData.results;
 
           setData(dataResults || []);

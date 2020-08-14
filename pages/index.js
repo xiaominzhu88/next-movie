@@ -60,16 +60,14 @@ export default function About({ description }) {
           background-color: #487eb0;
         }
         ul {
-          margin: 2em auto;
           padding: 10px;
-          width: 95vw;
           list-style: none;
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          grid-auto-rows: minmax(100px, auto);
           grid-gap: 20px;
         }
         li {
+          padding: 10px;
           cursor: pointer;
           text-align: center;
           border-radius: 1px;
@@ -109,28 +107,26 @@ export default function About({ description }) {
           letter-spacing: 0.2em;
         }
         @media (max-width: 700px) {
-          ul {
-            display: block;
-          }
           img {
             width: 60vw;
             height: 25vh;
+          }
+
+          li {
+            padding: 0.8em;
+            margin: 0.8em;
+          }
+        }
+        @media (max-width: 1210px) {
+          ul {
+            display: block;
           }
           h2 {
             font-size: 1em;
             padding: 1em;
           }
           h3 {
-            font-size: 0.8em;
-          }
-          li {
-            padding: 0.8em;
-            margin: 0.8em;
-          }
-        }
-        @media (max-width: 1090px) {
-          ul {
-            display: block;
+            font-size: 0.9em;
           }
         }
       `}</style>
@@ -141,7 +137,7 @@ export async function getServerSideProps(context) {
   const { getDescriptions } = await import('../db.js');
   const description = getDescriptions();
 
-  console.log('DESCRIPTION: ', description);
+  //console.log('DESCRIPTION: ', description);
 
   return {
     props: {

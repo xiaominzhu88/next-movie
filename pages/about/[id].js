@@ -117,7 +117,7 @@ export async function getServerSideProps(context) {
   const { getDescriptionById } = await import('../../db.js');
   const useInfo = await getDescriptionById(context.params.id);
 
-  console.log('PARAMS', useInfo);
+  //console.log('PARAMS', useInfo);
 
   return {
     props: {

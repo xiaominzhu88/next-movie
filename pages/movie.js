@@ -48,7 +48,7 @@ export default function Movie() {
     }
   }, [debouncedSearchTerm, apiKey, input, year]);
 
-  console.log('DATA:', data);
+  //console.log('DATA:', data);
 
   // const data = useFetch(
   //   `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${input}&include_adult=false&region=us&year=${year}`,

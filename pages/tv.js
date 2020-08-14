@@ -64,7 +64,7 @@ export default function Tv() {
       </div>
     );
 
-  console.log('TVDATA:', data);
+  //console.log('TVDATA:', data);
 
   const togglePop = () => {
     setVisible(true);

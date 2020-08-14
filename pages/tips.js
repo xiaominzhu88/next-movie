@@ -76,7 +76,7 @@ export default function Tips() {
     );
   }
 
-  console.log('TIP: ', data);
+  //console.log('TIP: ', data);
 
   const notify = () => {
     toast('💞Thank you for your rating💞', {
