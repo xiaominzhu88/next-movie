@@ -26,7 +26,7 @@ export default function Search() {
   const [name, setName] = useState('brad');
   const [data, setData] = useState([]);
 
-  const apiKey = process.env.apiKey;
+  const api_key = process.env.api_key;
 
   const debouncedSearchTerm = useDebounce(name, 500);
 
@@ -34,7 +34,7 @@ export default function Search() {
     if (debouncedSearchTerm) {
       const fetchResults = async () => {
         const res = await fetch(
-          `https://api.themoviedb.org/3/search/person?api_key=${apiKey}&language=en-US&query=${debouncedSearchTerm}&include_adult=false`,
+          `https://api.themoviedb.org/3/search/person?api_key=${api_key}&language=en-US&query=${debouncedSearchTerm}&include_adult=false`,
         );
         const json = await res.json();
         const dataResults = json.results;
@@ -43,7 +43,7 @@ export default function Search() {
       };
       fetchResults();
     }
-  }, [debouncedSearchTerm, apiKey, name]);
+  }, [debouncedSearchTerm, api_key, name]);
 
   return (
     <div>

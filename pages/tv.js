@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 export default function Tv() {
-  const apiKey = process.env.apiKey;
+  const api_key = process.env.api_key;
   const [tvPage, setTvPage] = useState(1);
   const [showText, setShowText] = useState(false);
   const [warning, setWarning] = useState('');
@@ -32,7 +32,7 @@ export default function Tv() {
   const classes = useStyles();
 
   const { data, error } = useSWR(
-    `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&language=cn&page=${tvPage}`,
+    `https://api.themoviedb.org/3/tv/popular?api_key=${api_key}&language=cn&page=${tvPage}`,
     fetcher,
   );
   if (error)

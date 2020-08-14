@@ -49,7 +49,7 @@ export default function Tips() {
   const classes = useStyles();
 
   const [checked, setChecked] = useState(false);
-  const apiKey = process.env.apiKey;
+  const api_key = process.env.api_key;
 
   const handleChange = () => {
     setChecked((prev) => !prev);
@@ -57,7 +57,7 @@ export default function Tips() {
   };
 
   const data = useFetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${page}`,
+    `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&language=en-US&page=${page}`,
   );
 
   if (!data) {

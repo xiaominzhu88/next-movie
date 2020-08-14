@@ -29,16 +29,16 @@ export default function Movie() {
   const [open, setOpen] = useState(false);
 
   const classes = useStyles();
-  // created .env.local file to store apikey
-  // export modules with apikey from next.config.js file
-  const apiKey = process.env.apiKey;
+  // created .env.local file to store api_key
+  // export modules with api_key from next.config.js file
+  const api_key = process.env.api_key;
   const debouncedSearchTerm = useDebounce(input, year, 500);
 
   useEffect(() => {
     if (debouncedSearchTerm) {
       const fetchResults = async () => {
         const response = await fetch(
-          `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${debouncedSearchTerm}&include_adult=false&region=us&year=${year}`,
+          `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${debouncedSearchTerm}&include_adult=false&region=us&year=${year}`,
         );
         const json = await response.json();
         const dataResults = json.results;
@@ -46,12 +46,12 @@ export default function Movie() {
       };
       fetchResults();
     }
-  }, [debouncedSearchTerm, apiKey, input, year]);
+  }, [debouncedSearchTerm, api_key, input, year]);
 
   //console.log('DATA:', data);
 
   // const data = useFetch(
-  //   `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${input}&include_adult=false&region=us&year=${year}`,
+  //   `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${input}&include_adult=false&region=us&year=${year}`,
   // );
 
   if (!data) {
