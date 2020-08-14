@@ -26,7 +26,7 @@ export default function Search() {
   const [name, setName] = useState('brad');
   const [data, setData] = useState([]);
 
-  const api_key = process.env.api_key;
+  const api_key = process.env.NEXT_PUBLIC_api_key;
 
   const debouncedSearchTerm = useDebounce(name, 500);
 

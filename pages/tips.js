@@ -49,7 +49,7 @@ export default function Tips() {
   const classes = useStyles();
 
   const [checked, setChecked] = useState(false);
-  const api_key = process.env.api_key;
+  const api_key = process.env.NEXT_PUBLIC_api_key;
 
   const handleChange = () => {
     setChecked((prev) => !prev);

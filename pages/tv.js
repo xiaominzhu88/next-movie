@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 export default function Tv() {
-  const api_key = process.env.api_key;
+  const api_key = process.env.NEXT_PUBLIC_api_key;
   const [tvPage, setTvPage] = useState(1);
   const [showText, setShowText] = useState(false);
   const [warning, setWarning] = useState('');
