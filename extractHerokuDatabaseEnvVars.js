@@ -2,9 +2,7 @@ module.exports = function extractHerokuDatabaseEnvVars() {
   if (process.env.DATABASE_URL) {
     const url = require('url');
 
-    const { hostname, pathname, auth, api_key } = url.parse(
-      process.env.DATABASE_URL,
-    );
+    const { hostname, pathname, auth } = url.parse(process.env.DATABASE_URL);
 
     const [username, password] = auth.split(':');
 
@@ -12,6 +10,5 @@ module.exports = function extractHerokuDatabaseEnvVars() {
     process.env.PGDATABASE = pathname.slice(1);
     process.env.PGUSERNAME = username;
     process.env.PGPASSWORD = password;
-    process.env.api_key = api_key;
   }
 };
