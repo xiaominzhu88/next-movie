@@ -26,7 +26,7 @@ export default function Search() {
   const [name, setName] = useState('brad');
   const [data, setData] = useState([]);
 
-  const apiKey = process.env.MovieKey;
+  const apiKey = process.env.apiKey;
 
   const debouncedSearchTerm = useDebounce(name, 500);
 

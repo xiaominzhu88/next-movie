@@ -4,7 +4,7 @@ import Router from 'next/router';
 export default function Custom404() {
   return (
     <div className="404page">
-      <h1>404 - Page Not Found</h1>
+      <h1>500 - It's our fault, we will fix it soon</h1>
       <img
         src="/error500.gif"
         alt="error gif Showing a properly dog according the status code"

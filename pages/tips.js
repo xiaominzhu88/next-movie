@@ -49,7 +49,7 @@ export default function Tips() {
   const classes = useStyles();
 
   const [checked, setChecked] = useState(false);
-  const apiKey = process.env.MovieKey;
+  const apiKey = process.env.apiKey;
 
   const handleChange = () => {
     setChecked((prev) => !prev);

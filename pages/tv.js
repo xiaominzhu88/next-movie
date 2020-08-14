@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 export default function Tv() {
-  const apiKey = process.env.MovieKey;
+  const apiKey = process.env.apiKey;
   const [tvPage, setTvPage] = useState(1);
   const [showText, setShowText] = useState(false);
   const [warning, setWarning] = useState('');
