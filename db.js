@@ -1,5 +1,7 @@
 const path = require('path');
+require('./extractHerokuDatabaseEnvVars')();
 require('dotenv').config({ path: path.resolve(process.cwd(), '.env.local') });
+
 const postgres = require('postgres');
 
 const sql =

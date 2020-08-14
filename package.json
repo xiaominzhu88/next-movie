@@ -7,7 +7,8 @@
     "devWithPostgres": "run-p build postgres",
     "build": "next build && echo Done!",
     "start": "next start -p ${PORT:-\"3000\"}",
-    "migrate": "dotenv -e .env.local ley"
+    "migrate": "dotenv -e .env.local ley",
+    "heroku-postbuild": "yarn migrate up && yarn build"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
