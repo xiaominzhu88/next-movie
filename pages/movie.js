@@ -32,6 +32,7 @@ export default function Movie() {
   // created .env.local file to store api_key
   // export modules with api_key from next.config.js file
   const api_key = process.env.api_key;
+
   const debouncedSearchTerm = useDebounce(input, year, 500);
 
   useEffect(() => {
