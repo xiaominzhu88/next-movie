@@ -123,63 +123,66 @@ export default function Tv() {
       </div>
       <div className="tv-container">
         <ul>
-          {data.results.map((tv, i) => {
-            return (
-              <li key={tv.id}>
-                <h2 onClick={() => setShowText(!showText)}>{tv.name}</h2>
-                <div
-                  className="overview"
-                  style={{ display: showText ? 'block' : 'none' }}
-                >
-                  {tv.overview || (
-                    <div>
-                      <p>
-                        <span role="img" aria-label="language emoji">
-                          🧚‍♀️
-                        </span>
-                        Language: {tv.original_language}
-                      </p>
-                      <p>
-                        <span role="img" aria-label="language emoji">
-                          🎗
-                        </span>
-                        Popularity: {tv.popularity}
-                      </p>
+          {data
+            ? data.results.map((tv, i) => {
+                return (
+                  <li key={tv.id}>
+                    <h2 onClick={() => setShowText(!showText)}>{tv.name}</h2>
+                    <div
+                      className="overview"
+                      style={{ display: showText ? 'block' : 'none' }}
+                    >
+                      {tv.overview || (
+                        <div>
+                          <p>
+                            <span role="img" aria-label="language emoji">
+                              🧚‍♀️
+                            </span>
+                            Language: {tv.original_language}
+                          </p>
+                          <p>
+                            <span role="img" aria-label="language emoji">
+                              🎗
+                            </span>
+                            Popularity: {tv.popularity}
+                          </p>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                <img
-                  src={
-                    tv.poster_path
-                      ? `https://image.tmdb.org/t/p/w342/${tv.poster_path}`
-                      : '/imgError.jpg'
-                  }
-                  alt="tv images"
-                />
-                <div>
-                  <Button
-                    className={classes.root}
-                    onClick={() => {
-                      const favoTvs =
-                        JSON.parse(window.localStorage.getItem('favoTvs')) ||
-                        [];
-                      if (favoTvs.indexOf(tv.name) === -1) {
-                        window.localStorage.setItem(
-                          'favoTvs',
-                          JSON.stringify([...favoTvs, tv.name]),
-                        );
-                        alert('Saved to favourite page');
-                      } else {
-                        alert('Favourite already exist');
+                    <img
+                      src={
+                        tv.poster_path
+                          ? `https://image.tmdb.org/t/p/w342/${tv.poster_path}`
+                          : '/imgError.jpg'
                       }
-                    }}
-                  >
-                    add to favourite
-                  </Button>{' '}
-                </div>
-              </li>
-            );
-          })}
+                      alt="tv images"
+                    />
+                    <div>
+                      <Button
+                        className={classes.root}
+                        onClick={() => {
+                          const favoTvs =
+                            JSON.parse(
+                              window.localStorage.getItem('favoTvs'),
+                            ) || [];
+                          if (favoTvs.indexOf(tv.name) === -1) {
+                            window.localStorage.setItem(
+                              'favoTvs',
+                              JSON.stringify([...favoTvs, tv.name]),
+                            );
+                            alert('Saved to favourite page');
+                          } else {
+                            alert('Favourite already exist');
+                          }
+                        }}
+                      >
+                        add to favourite
+                      </Button>{' '}
+                    </div>
+                  </li>
+                );
+              })
+            : []}
           <div className="popup">
             {visible ? (
               <PopUp toggle={togglePop} warning={warning} close={close} />
