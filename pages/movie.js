@@ -33,7 +33,7 @@ export default function Movie() {
   // export modules with api_key from next.config.js file
   const api_key = process.env.NEXT_PUBLIC_api_key;
 
-  console.log('PROCESS: ', process.env.NEXT_PUBLIC_api_key);
+  //console.log('PROCESS: ', process.env.NEXT_PUBLIC_api_key);
 
   const debouncedSearchTerm = useDebounce(input, year, 500);
 

@@ -11,4 +11,7 @@ module.exports = function extractHerokuDatabaseEnvVars() {
     process.env.PGUSERNAME = username;
     process.env.PGPASSWORD = password;
   }
+  if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+  }
 };
