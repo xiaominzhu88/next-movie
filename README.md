@@ -37,9 +37,8 @@ This project is a Next.js app which makes use of a PostgresQL database and API (
 
 ## Using API Key
 
-- you should add environment variables to the JavaScript bundle, open next.config.js and add the env config
+- Add the dotenv config
 - Access process.env.customKey in code
-- Next.js will replace process.env.customKey with 'my-value' at build time. Trying to destructure process.env variables won't work due to the nature of webpack DefinePlugin.
 
 # PostgreSQL
 
